@@ -1,4 +1,5 @@
 package org.example;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -82,7 +83,7 @@ public class Main {
      * @return random array
      */
     public static int[] createRandomArray() {
-        Random random = new Random();
+        SecureRandom random = new SecureRandom();
         int length = random.nextInt(10) + 1;
         int[] arr = new int[length];
 
