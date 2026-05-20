@@ -76,6 +76,11 @@ public class Main {
             }
         }
     }
+
+    /**
+     * this function create random array
+     * @return random array
+     */
     public static int[] createRandomArray() {
         Random random = new Random();
         int length = random.nextInt(10) + 1;
@@ -86,6 +91,12 @@ public class Main {
         }
         return arr;
     }
+
+    /**
+     * this function create array of user input
+     * @param input input numbers
+     * @return
+     */
     public static int[] createManualArray(String input) {
         String[] parts = input.split(",");
         int[] arr = new int[parts.length];
@@ -95,6 +106,11 @@ public class Main {
         }
         return arr;
     }
+
+    /**
+     * this method print values in an array
+     * @param arr specific array
+     */
     public static void printArray(int[] arr){
         if (arr != null || arr.length != 0) {
             for (int num : arr) {
@@ -104,12 +120,24 @@ public class Main {
             System.out.println("Array is empty");
         }
     }
+
+    /**
+     * this function add number to array
+     * @param arr specific array
+     * @param number number to add
+     * @return return new array
+     */
     public static int[] addNumber(int[] arr, int number) {
         int[] newArr = Arrays.copyOf(arr, arr.length + 1);
         newArr[newArr.length - 1] = number;
         return newArr;
     }
 
+    /**
+     * find max number
+     * @param arr array
+     * @return return max number
+     */
     public static int findMax(int[] arr) {
         int max = arr[0];
         for (int num : arr) {
@@ -118,6 +146,11 @@ public class Main {
         return max;
     }
 
+    /**
+     * find min
+     * @param arr specific array
+     * @return return min number
+     */
     public static int findMin(int[] arr) {
         int min = arr[0];
         for (int num : arr) {
@@ -126,6 +159,12 @@ public class Main {
         return min;
     }
 
+    /**
+     * remove number from array
+     * @param arr array
+     * @param number number to remove
+     * @return return new array
+     */
     public static int[] removeNumber(int[] arr, int number) {
         if (arr == null || arr.length == 0) {
             return arr;
@@ -147,6 +186,10 @@ public class Main {
         return newArray;
     }
 
+    /**
+     * delete array
+     * @return null
+     */
     public static int[] deleteArray() {
         return null;
     }
