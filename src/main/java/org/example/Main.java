@@ -1,12 +1,12 @@
 package org.example;
 import java.security.SecureRandom;
 import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
+    private static final SecureRandom random = new SecureRandom();
     static void main() {
         Scanner scanner = new Scanner(System.in);
         int[] array = null;
@@ -83,7 +83,6 @@ public class Main {
      * @return random array
      */
     public static int[] createRandomArray() {
-        SecureRandom random = new SecureRandom();
         int length = random.nextInt(10) + 1;
         int[] arr = new int[length];
 
