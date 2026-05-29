@@ -12,23 +12,23 @@ public class Main {
         int[] array = null;
 
         while (true) {
-            if (array == null) {
+            while (array == null || array.length == 0) {
                 System.out.println("Please choose how you want to create array");
                 System.out.println("1 - Manual");
                 System.out.println("2 - Random");
                 System.out.println("Your choice:");
 
-                int choice = scanner.nextInt();
-                scanner.nextLine();
-
+                int choice = readInt(scanner);
                 if (choice == 1) {
                     System.out.println("Please enter number separated by comma");
                     String input = scanner.nextLine();
                     array = createManualArray(input);
-                } else {
+                } else if (choice == 2) {
                     System.out.println("Created ramdom array:");
                     array = createRandomArray();
                     printArray(array);
+                } else {
+                    System.out.println("Invalid input");
                 }
             }
             // Main menu
@@ -40,10 +40,9 @@ public class Main {
             System.out.println("5 - Remove number");
             System.out.println("6 - Delete array");
             System.out.println("7 - Exit");
-            System.out.print("Your choice: ");
+            System.out.println("Your choice: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            int choice = readInt(scanner);
 
             switch (choice) {
                 case 1:
@@ -51,18 +50,26 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Number you want to add:");
-                    int numberToAdd = scanner.nextInt();
+                    int numberToAdd = readInt(scanner);
                     array = addNumber(array, numberToAdd);
                     break;
                 case 3:
+                    if (array.length == 0) {
+                        System.out.println("Can not find max, array is empty");
+                        break;
+                    }
                     System.out.println("The max number in array is: " + findMax(array));
                     break;
                 case 4:
+                    if (array.length == 0) {
+                        System.out.println("Can not find min, array is empty");
+                        break;
+                    }
                     System.out.println("The min number in array is: " + findMin(array));
                     break;
                 case 5:
                     System.out.println("Number you want to remove:");
-                    int numberToRemove = scanner.nextInt();
+                    int numberToRemove = readInt(scanner);
                     array = removeNumber(array, numberToRemove);
                     break;
                 case 6:
@@ -95,14 +102,20 @@ public class Main {
     /**
      * this function create array of user input
      * @param input input numbers
-     * @return
+     * @return manual array
      */
     public static int[] createManualArray(String input) {
+        if (input == null) return new int[0];
         String[] parts = input.split(",");
         int[] arr = new int[parts.length];
 
         for (int i = 0; i < parts.length; i++) {
-            arr[i] = Integer.parseInt(parts[i].trim());
+            try {
+                arr[i] = Integer.parseInt(parts[i].trim());
+            } catch (NumberFormatException _) {
+                System.out.println("Invalid number:" + parts[i]);
+                return new int[0];
+            }
         }
         return arr;
     }
@@ -112,12 +125,12 @@ public class Main {
      * @param arr specific array
      */
     public static void printArray(int[] arr){
-        if (arr != null || arr.length != 0) {
+        if (arr == null || arr.length == 0) {
+            System.out.println("Array is empty");
+        } else {
             for (int num : arr) {
                 System.out.print(" | " + num);
             }
-        } else {
-            System.out.println("Array is empty");
         }
     }
 
@@ -192,5 +205,20 @@ public class Main {
      */
     public static int[] deleteArray() {
         return null;
+    }
+
+    /**
+     * read only integer from user input
+     * @param scanner scanner
+     * @return choice
+     */
+    private static int readInt(Scanner scanner) {
+        while (!scanner.hasNextInt()) {
+            System.out.println("Invalid input");
+            scanner.next();
+        }
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+        return choice;
     }
 }
